@@ -9,8 +9,8 @@ import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "students")
-open class Student(
+@Table(name = "professors")
+open class Professor(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
@@ -19,6 +19,7 @@ open class Student(
 
     val email: String = "",
 
-    @OneToMany(mappedBy = "student", cascade = [CascadeType.ALL], orphanRemoval = true)
-    val enrollments: MutableList<Enrollment> = mutableListOf()
+    // uno a muchos
+    @OneToMany(mappedBy = "professor", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val subjects: MutableList<Subject> = mutableListOf()
 )

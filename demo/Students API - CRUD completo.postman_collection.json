@@ -1,0 +1,502 @@
+{
+  "info": {
+    "_postman_id": "1290959c-dcda-4a0b-8cfb-3c7753e1fd8f",
+    "name": "Students API - CRUD completo",
+    "description": "Coleccion con los 20 endpoints (CRUD de Student, Professor, Subject, Enrollment). Proyecto Spring Boot + Kotlin sobre PostgreSQL. Servidor en puerto 8787.\n\nORDEN RECOMENDADO PARA PROBAR (por las dependencias entre entidades):\n1. Professor -> Create (genera id 1)\n2. Student -> Create (genera id 1)\n3. Subject -> Create (usa professorId 1)\n4. Enrollment -> Create (usa studentId 1 y subjectId 1)\n\nLuego puedes probar los GET, PUT y DELETE de cada entidad.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55061526",
+    "_collection_link": "https://go.postman.co/collection/55061526-1290959c-dcda-4a0b-8cfb-3c7753e1fd8f?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Professors",
+      "item": [
+        {
+          "name": "Create Professor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Dr. Garcia\",\n    \"email\": \"garcia@puce.edu.ec\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/professors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors"
+              ]
+            },
+            "description": "Crea un profesor. 201 Created. Si el nombre va en blanco -> 400 (BlankNameException)."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Professors",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/professors",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors"
+              ]
+            },
+            "description": "Lista todos los profesores. 200 OK."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Professor By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/professors/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors",
+                "1"
+              ]
+            },
+            "description": "Obtiene un profesor por id. 200 OK. Si no existe -> 404 (ProfessorNotFound)."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Professor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Dr. Garcia Lopez\",\n    \"email\": \"garcia.lopez@puce.edu.ec\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/professors/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors",
+                "1"
+              ]
+            },
+            "description": "Actualiza nombre y/o email de un profesor. 200 OK. Si no existe -> 404."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Professor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/professors/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "professors",
+                "1"
+              ]
+            },
+            "description": "Elimina un profesor. 204 No Content. Si no existe -> 404."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Students",
+      "item": [
+        {
+          "name": "Create Student",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Ana Torres\",\n    \"email\": \"ana@puce.edu.ec\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students"
+              ]
+            },
+            "description": "Crea un estudiante. 201 Created. Si el nombre va en blanco -> 400 (BlankNameException)."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Students",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students"
+              ]
+            },
+            "description": "Lista todos los estudiantes. 200 OK."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Student By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "1"
+              ]
+            },
+            "description": "Obtiene un estudiante por id. 200 OK. Si no existe -> 404 (StudentNotFoundException)."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Student",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Ana Torres Ruiz\",\n    \"email\": \"ana.torres@puce.edu.ec\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/students/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "1"
+              ]
+            },
+            "description": "Actualiza nombre y/o email de un estudiante. 200 OK. Si no existe -> 404."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Student",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/students/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "students",
+                "1"
+              ]
+            },
+            "description": "Elimina un estudiante. 204 No Content. Si no existe -> 404."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Subjects",
+      "item": [
+        {
+          "name": "Create Subject",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Arquitectura Empresarial\",\n    \"code\": \"AE-101\",\n    \"professorId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects"
+              ]
+            },
+            "description": "Crea una materia. 201 Created. Requiere professorId existente; si no existe -> 404 (ProfessorNotFound). Si name o code van en blanco -> 400."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Subjects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects"
+              ]
+            },
+            "description": "Lista todas las materias. 200 OK."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Subject By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "1"
+              ]
+            },
+            "description": "Obtiene una materia por id. 200 OK. Si no existe -> 404 (SubjectNotFoundException)."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Subject",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Arquitectura Empresarial Avanzada\",\n    \"code\": \"AE-201\",\n    \"professorId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "1"
+              ]
+            },
+            "description": "Actualiza nombre, codigo o profesor asignado. 200 OK. Si la materia o el profesor no existen -> 404."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Subject",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/subjects/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "subjects",
+                "1"
+              ]
+            },
+            "description": "Elimina una materia. 204 No Content. Si no existe -> 404."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Enrollments",
+      "item": [
+        {
+          "name": "Create Enrollment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"studentId\": 1,\n    \"subjectId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/enrollments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments"
+              ]
+            },
+            "description": "Inscribe un estudiante en una materia. 201 Created. status se asigna 'INSCRITO' automaticamente. Si el estudiante o la materia no existen -> 404."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Enrollments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/enrollments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments"
+              ]
+            },
+            "description": "Lista todas las inscripciones. 200 OK."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Enrollment By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/enrollments/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments",
+                "1"
+              ]
+            },
+            "description": "Obtiene una inscripcion por id. 200 OK. Si no existe -> 404 (EnrollmentNotFound)."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Enrollment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"APROBADO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/enrollments/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments",
+                "1"
+              ]
+            },
+            "description": "Actualiza solo el estado (status). 200 OK. Si no existe -> 404."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Enrollment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/enrollments/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "enrollments",
+                "1"
+              ]
+            },
+            "description": "Elimina una inscripcion. 204 No Content. Si no existe -> 404."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8787"
+    }
+  ]
+}

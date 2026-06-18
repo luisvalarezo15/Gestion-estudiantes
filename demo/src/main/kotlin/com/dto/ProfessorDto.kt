@@ -1,11 +1,11 @@
 package com.dto
 
-data class StudentRequest(
+data class ProfessorRequest(
     val name: String,
     val email: String,
 )
 
-data class StudentResponse(
+data class ProfessorResponse(
     val id: Long,
     val name: String,
     val email: String,

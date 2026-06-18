@@ -1,9 +1,8 @@
 package com.repositories
 
-import com.entities.Student
+import com.entities.Enrollment
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
-// es el que interactua con la base de datos
 @Repository
-interface StudentRepository : JpaRepository<Student, Long>
+interface EnrollmentRepository : JpaRepository<Enrollment, Long>
